@@ -1,0 +1,36 @@
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+*.db
+db.sqlite3
+env/
+venv/
+.env
+
+# Django
+/media/
+staticfiles/
+*.log
+
+# Node
+node_modules/
+build/
+dist/
+.env.local
+
+# React
+library-app/.next/
+library-app/.cache/
+library-app/.env
+library-app/yarn.lock
+library-app/package-lock.json
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
