@@ -37,19 +37,57 @@ def search_google_books(request):
     for item in books:
         volume = item.get('volumeInfo', {})
         results.append({
+            'id': item.get('id'),  
             'title': volume.get('title'),
+            'subtitle': volume.get('subtitle', ''),  
             'authors': volume.get('authors', []),
             'description': volume.get('description', 'No description available'),
             'thumbnail': volume.get('imageLinks', {}).get('thumbnail'),
             'publishedDate': volume.get('publishedDate'),
             'pageCount': volume.get('pageCount'),
             'categories': volume.get('categories', []),
-            'infoLink': volume.get('infoLink'),
+            'publisher': volume.get('publisher', ''),  
+            'language': volume.get('language', ''),   
+            'previewLink': volume.get('previewLink'),  
+            'infoLink': volume.get('infoLink'),        
+            'maturityRating': volume.get('maturityRating', 'UNKNOWN'),  
+            'averageRating': volume.get('averageRating', None),        
+            'ratingsCount': volume.get('ratingsCount', 0),
         })
 
     return Response({'results': results})
 
 
+@api_view(['GET'])
+def single_book(request, volume_id):
+    url = f"https://www.googleapis.com/books/v1/volumes/{volume_id}"
+    response = requests.get(url)
+
+    if response.status_code != 200:
+        return Response({'error': 'Google API request failed'}, status=500)
+
+    volume = response.json().get('volumeInfo', {})
+
+    book_detail = {
+            'id': volume.get('id'),  
+            'title': volume.get('title'),
+            'subtitle': volume.get('subtitle', ''),  
+            'authors': volume.get('authors', []),
+            'description': volume.get('description', 'No description available'),
+            'thumbnail': volume.get('imageLinks', {}).get('thumbnail'),
+            'publishedDate': volume.get('publishedDate'),
+            'pageCount': volume.get('pageCount'),
+            'categories': volume.get('categories', []),
+            'publisher': volume.get('publisher', ''),  
+            'language': volume.get('language', ''),   
+            'previewLink': volume.get('previewLink'),  
+            'infoLink': volume.get('infoLink'),        
+            'maturityRating': volume.get('maturityRating', 'UNKNOWN'),  
+            'averageRating': volume.get('averageRating', None),        
+            'ratingsCount': volume.get('ratingsCount', 0),
+        }
+
+    return Response(book_detail)
 # ---------------- Book FBVs ----------------
 
 @api_view(['GET', 'POST'])

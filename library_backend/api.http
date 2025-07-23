@@ -1,0 +1,8 @@
+### Search Google Books from Django backend
+GET http://localhost:8000/api/google-books/?q=django
+Accept: application/json
+
+
+### 📗 Get a single book by volume ID (replace with real volume ID)
+GET http://127.0.0.1:8000/api/google-book/3t8SLVloJjsC/
+Accept: application/json
