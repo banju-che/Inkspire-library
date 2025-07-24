@@ -6,3 +6,59 @@ Accept: application/json
 ### 📗 Get a single book by volume ID (replace with real volume ID)
 GET http://127.0.0.1:8000/api/google-book/3t8SLVloJjsC/
 Accept: application/json
+
+### Register a New User
+POST http://localhost:8000/auth/users/
+Content-Type: application/json
+
+{
+  "email": "julius@example.com",
+  "password": "testpass123",
+  "re_password": "testpass123",
+  "first_name": "Julius",
+  "last_name": "Gacheru",
+  "phone": "+254712345678"
+}
+
+###
+
+### Login (Get JWT Access + Refresh Tokens)
+POST http://localhost:8000/auth/jwt/create/
+Content-Type: application/json
+
+{
+  "email": "julius@example.com",
+  "password": "testpass123"
+}
+
+###
+
+### Refresh JWT Access Token
+POST http://localhost:8000/auth/jwt/refresh/
+Content-Type: application/json
+
+{
+  "refresh": "your_refresh_token_here"
+}
+
+###
+
+### Verify JWT Token
+POST http://localhost:8000/auth/jwt/verify/
+Content-Type: application/json
+
+{
+  "token": "your_access_token_here"
+}
+
+###
+
+### Get Current Logged-in User Info (use Bearer token below)
+GET http://localhost:8000/auth/users/me/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzUzMzc4OTgyLCJpYXQiOjE3NTMzNzUzODIsImp0aSI6ImM0ZTcwMDk1MWVkMjQyZTBiYTFhMzU1YzZjNGQ4ZDRkIiwidXNlcl9pZCI6NH0.PAAbpJMyEbTXEIPdUc3kp91lR8hw1Crb4sSss23CXF8
+
+###
+
+### Protected Test Endpoint (if you created one)
+GET http://localhost:8000/api/protected/
+Authorization: Bearer your_access_token_here

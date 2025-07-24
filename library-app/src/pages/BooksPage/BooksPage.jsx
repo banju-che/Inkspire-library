@@ -33,7 +33,7 @@ function BooksPage() {
       } catch (err) {
         if (err.name !== "AbortError") {
           console.error("Error fetching books:", err);
-          setError("Something went wrong fetching books.");
+          setError();
         }
       } finally {
         setLoading(false);
